@@ -84,36 +84,7 @@ The code allows for a particular data key to be retrieved individually**
 This can be achived with ease using AWS CLI and BASH instead of any functional code/sdk ( unless we need it for integration purposes with existing code base)
 Below is a simple shell script to achieve the same.
 
-#!/bin/bash
-
-read -p "      Please provide instance ID you want to explore: " instId
-echo  "        What do you want from below?"
-  echo -e "\n"
-  echo "            1. Full metadata in JSON format"
-  echo "            2. Instance Type"
-  echo "            3. Public IP address "
-  echo "            4. Launch time "
-  echo "            5. Running Status   "
-  echo "            6. Instance Profile  "
-  echo ""
-  read -p "      Please input your choice number & enter: " choice
-
-  case $choice in
-    "1") aws ec2 describe-instances --region us-west-2   --instance-ids $instId |jq
-      ;;
-    "2") aws ec2 describe-instances --region us-west-2   --instance-ids $instId |jq .Reservations[].Instances[].InstanceType
-      ;;
-    "3") aws ec2 describe-instances --region us-west-2   --instance-ids $instId |jq .Reservations[].Instances[].PublicIpAddress
-      ;;
-    "4") aws ec2 describe-instances --region us-west-2   --instance-ids $instId |jq .Reservations[].Instances[].LaunchTime
-      ;;
-    "5") aws ec2 describe-instances --region us-west-2   --instance-ids $instId |jq .Reservations[].Instances[].State.Name
-      ;;
-    "6") aws ec2 describe-instances --region us-west-2   --instance-ids $instId |jq .Reservations[].Instances[].IamInstanceProfile.Arn
-      ;;
-    *) echo -e "\n\n     ERR! WRONG CHOICE. PLEASE ENTER NUMBER BETWEEN 1 and 6  \n\n\n"
-   esac
-   
+Please refer to getInstanceMeta.sh for the code.   
    
 Note: This can be enhanced for error handling and nice clours can be added. Also we can easily add additional items data keys to the menu as per the need.   
    
@@ -130,27 +101,6 @@ value = a**
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Please refer to the simple python function created in the same repo (getvalue.py) to achive the above requirement using dictionary data structure.
-
-def get_value(object : dict,key : str) -> str :
-    val=object
-    for i in key.split('/'): 
-     if i!='' :
-       try:
-         val=val[i]
-       except KeyError: # this catch is for wrong key strings
-         val="Unknown key string"  
-         break
-       except TypeError as e: # this catch is for wrong/unexpected objects
-         if str(e)=="string indices must be integers" :  
-          val="Unexpected object" 
-         break 
-       except: # this is for rest all unknown errors
-         val="Error"  
-         print("Unknown Error")
-         break  
-     else: # this is for keys having extra backslash at the end
-      val="wrong key standards"    
-    return val  
 	
 some edge cases that i can think of :
 
