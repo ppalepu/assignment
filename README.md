@@ -3,7 +3,7 @@
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-3 tier application assumptions:
+3 tier application assumptions: 
 
   -> Assuming an AWS account with admin users are already exists. 
   -> Asuuming there is a code reposity and code already exists in the repository for UI and API applications( for maintainance CI/CD) 
