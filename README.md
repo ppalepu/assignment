@@ -4,16 +4,19 @@
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 3 tier application assumptions:
+
   -> Assuming an AWS account with admin users are already exists.
   -> Asuuming there is a code reposity and code already exists in the repository for UI and API applications( for maintainance CI/CD)
   -> Going with serverless or managed database to avoid additional maintainance overheads in the project.
 
 Below infrastructure should be created/deployed:
+
   -> User interface docker micro service
   -> API micro service for backend operations
   -> A database for state
 
 Infrastructure creation on AWS :(IAC) . Either one of the below setups can be used.
+
   a) Serverless approach:
       -> ecr repo
       -> Elastic Bean stack
@@ -35,10 +38,12 @@ Infrastructure creation on AWS :(IAC) . Either one of the below setups can be us
       -> RDS
 
 Inaddition to the above we can plan below CI/CD for maintainance of the application set up using any of the below approaches:
+
    a) Traditional local CI/CD tooling like jenkins and gitlab CI/CD
    b) Cloud Native tooling : AWS code build,codepilne , code deploy.
    
 Below is the rough structure of the pipelines we need to create:
+
    a) CI/CD infra pipeline jenkins/gitlabCI:
       
       A webhook on the repository will be implemented as such whenever there is a commit to the master branch this pipeline gets triggered.
@@ -72,6 +77,8 @@ Below is the rough structure of the pipelines we need to create:
 **We need to write code that will query the meta data of an instance within AWS and provide a json formatted output. The choice of language and implementation is up to you.
 Bonus Points
 The code allows for a particular data key to be retrieved individually**
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 This can be achived with ease using AWS CLI and BASH instead of any functional code/sdk ( unless we need it for integration purposes with existing code base)
@@ -120,6 +127,8 @@ object = {“x”:{“y”:{“z”:”a”}}}
 key = x/y/z
 value = a**
 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 Please refer to the simple python function created in the same repo (getvalue.py) to achive the above requirement using dictionary data structure.
 
 def get_value(object : dict,key : str) -> str :
@@ -144,6 +153,7 @@ def get_value(object : dict,key : str) -> str :
     return val  
 	
 some edge cases that i can think of :
+
  a) Input : object= {"a":{"b":{"c":"d"}}} key='a/b/'
    Output: "wrong key standards"
  b) Input: object= {"a":{"b":{"c":"d"}}} key='a/b'
