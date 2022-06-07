@@ -35,7 +35,7 @@ Infrastructure creation on AWS :(IAC) . Either one of the below setups can be us
 
    b) Traditional VM based approach:
 
-      -> VPC, subnets , nacls ,security groups
+      -> VPC, subnets 
       -> Staticwebapp on S3 
       -> Cloudfront distribution
       -> route 53 domain 
