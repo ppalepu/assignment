@@ -21,14 +21,15 @@ Infrastructure creation on AWS :(IAC) . Either one of the below setups can be us
 
   a) Serverless approach:
   
-      -> ecr repo 
-      -> Elastic Bean stack 
-      -> fargate 
+      -> ECR repo 
+      -> Elastic Bean stack       
       -> route 53 & UI domain 
+      -> Cloudfront distribution
       -> RDS 
       -> apigateway 
       -> lambda 
       -> IAM 
+      -> Cloudwatch logging
 
       Note : This cannot be implemented in the given time
       
