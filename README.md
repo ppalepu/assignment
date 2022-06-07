@@ -30,17 +30,21 @@ Infrastructure creation on AWS :(IAC) . Either one of the below setups can be us
       -> lambda 
       -> IAM 
 
-      Note : For code refere to the terraform files and modules in the same repository
+      Note : This cannot be implemented in the given time
+      
 
    b) Traditional VM based approach:
 
-      -> VPC, subnets , nacls 
-      -> EC2 , security groups 
-      -> elastic ip 
+      -> VPC, subnets , nacls ,security groups
+      -> Staticwebapp on S3 
+      -> Cloudfront distribution
       -> route 53 domain 
-      -> RDS 
+      -> lambda for api
+      -> apigateway for lambda api
+      -> DynamoDB/RDS 
       
-      Note : This is not implemented in the code in the interest of time
+      Note : Terraform main file is implemented for this approach and it deals with modules. Could not implement finer details of modules in the given time .
+      Thats a big task . But based on the main file , my idea on module implementation can be understood.
 
 Inaddition to the above we can plan below CI/CD for maintainance of the application set up using any of the below approaches:
 
