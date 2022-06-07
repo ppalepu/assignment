@@ -5,42 +5,42 @@
 
 3 tier application assumptions:
 
-  -> Assuming an AWS account with admin users are already exists.
-  -> Asuuming there is a code reposity and code already exists in the repository for UI and API applications( for maintainance CI/CD)
-  -> Going with serverless or managed database to avoid additional maintainance overheads in the project.
+  -> Assuming an AWS account with admin users are already exists. 
+  -> Asuuming there is a code reposity and code already exists in the repository for UI and API applications( for maintainance CI/CD) 
+  -> Going with serverless or managed database to avoid additional maintainance overheads in the project. 
 
 Below infrastructure should be created/deployed:
 
-  -> User interface docker micro service
-  -> API micro service for backend operations
-  -> A database for state
+  -> User interface docker micro service 
+  -> API micro service for backend operations 
+  -> A database for state 
 
 Infrastructure creation on AWS :(IAC) . Either one of the below setups can be used.
 
   a) Serverless approach:
-      -> ecr repo
-      -> Elastic Bean stack
-      -> fargate
-      -> route 53 & UI domain
-      -> RDS
-      -> apigateway
-      -> lambda
-      -> IAM
+      -> ecr repo 
+      -> Elastic Bean stack 
+      -> fargate 
+      -> route 53 & UI domain 
+      -> RDS 
+      -> apigateway 
+      -> lambda 
+      -> IAM 
 
       Note : For code refere to the terraform files and modules in the same repository
 
    b) Traditional VM based approach:
 
-      -> VPC, subnets , nacls
-      -> EC2 , security groups
-      -> elastic ip
-      -> route 53 domain
-      -> RDS
+      -> VPC, subnets , nacls 
+      -> EC2 , security groups 
+      -> elastic ip 
+      -> route 53 domain 
+      -> RDS 
 
 Inaddition to the above we can plan below CI/CD for maintainance of the application set up using any of the below approaches:
 
-   a) Traditional local CI/CD tooling like jenkins and gitlab CI/CD
-   b) Cloud Native tooling : AWS code build,codepilne , code deploy.
+   a) Traditional local CI/CD tooling like jenkins and gitlab CI/CD 
+   b) Cloud Native tooling : AWS code build,codepilne , code deploy. 
    
 Below is the rough structure of the pipelines we need to create:
 
@@ -105,13 +105,13 @@ Please refer to the simple python function created in the same repo (getvalue.py
 some edge cases that i can think of :
 
  a) Input : object= {"a":{"b":{"c":"d"}}} key='a/b/'
-   Output: "wrong key standards"
+   Output: "wrong key standards" 
  b) Input: object= {"a":{"b":{"c":"d"}}} key='a/b'
-   Output: {"c":"d"}
+   Output: {"c":"d"} 
  c) Input: object= {"a":{"b":{"c":"d"}}} key='a/b/y'
-   Output: "Unknown key string"
+   Output: "Unknown key string" 
  d) Input: object= {"a":{"b":"c"}} key='a/b/c'
-   Output: "Unexpected object" 
+   Output: "Unexpected object"  
  e) Input: object= {"a":{"b":{"c":"d"}}} key='x/y/z' 
-   Output: "Unknown key string"
+   Output: "Unknown key string" 
 	
