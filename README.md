@@ -1,4 +1,5 @@
-**challenge#1:**
+**challenge#1:** 
+
 **A 3-tier environment is a common setup. Use a tool of your choosing/familiarity create these resources. Please remember we will not be judged on the outcome but more focusing on the approach, style and reproducibility.**
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -6,14 +7,20 @@
 3 tier application assumptions: 
 
   -> Assuming an AWS account with admin users are already exists. 
+  
   -> Asuuming there is a code reposity and code already exists in the repository for UI and API applications( for maintainance CI/CD) 
+  
   -> Going with serverless or managed database to avoid additional maintainance overheads in the project. 
+  
 
 Below infrastructure should be created/deployed:
 
   -> User interface docker micro service 
+  
   -> API micro service for backend operations 
+  
   -> A database for state 
+  
 
 Infrastructure creation on AWS :(IAC) . Either one of the below setups can be used.
 
