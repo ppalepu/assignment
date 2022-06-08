@@ -6,15 +6,15 @@
 
 3 tier application assumptions: 
 
-   -> Assuming an AWS account with admin users are already exists.   
+   -> Assuming an AWS account with admin users are already exists with blank state in the state s3 bucket.
    -> Asuuming there is a code reposity and code already exists in the repository for UI and API applications( for maintainance CI/CD)   
-   -> Going with serverless or managed database to avoid additional maintainance overheads in the project.   
-
+   -> Going with serverless db or managed db to avoid additional maintainance overheads in the project.   
+   
 Below infrastructure should be created/deployed:
 
-   -> User interface docker micro service   
-   -> API micro service for backend operations   
-   -> A database for state 
+   -> User interface - static web application on s3   
+   -> API micro service for backend operations on DB to be used by any other interfaces such as android,ios.  
+   -> A database for state transactions.
   
 
 Infrastructure creation on AWS :(IAC) . Either one of the below setups can be used.
@@ -47,17 +47,17 @@ Infrastructure creation on AWS :(IAC) . Either one of the below setups can be us
       Note : Terraform main file is implemented for this approach and it deals with modules. Could not implement finer details of modules in the given time .
       Thats a big task . But based on the main file , my idea on module implementation can be understood.
 
-Inaddition to the above we can plan below CI/CD for maintainance of the application set up using any of the below approaches:
+We can plan below CI/CD set up for maintainance of the application using any of the below approaches:
 
-    a) Traditional local CI/CD tooling like jenkins and gitlab CI/CD 
-    b) Cloud Native tooling : AWS code build,codepilne , code deploy. 
+    a) Traditional local CI/CD tooling like jenkins or gitlab CI/CD 
+    b) Cloud Native tooling : AWS code commit,code build,codepilne , code deploy. 
    
 Below is the rough structure of the pipelines we need to create:
 
     a) CI/CD infra pipeline jenkins/gitlabCI:
       
       A webhook on the repository will be implemented as such whenever there is a commit to the master branch this pipeline gets triggered.
-      In this infra repository terraform code related to infrastructure is maintained with backend state so that many people can work on infra 
+      Terraform code related to infrastructure is maintained in this repository.Using backend/remote state so that many people can work on infra 
       changes simultaneously.
       
         stage 1: checkout infra code from the infra repository
@@ -68,19 +68,17 @@ Below is the rough structure of the pipelines we need to create:
     b) CI/CD maintainance pipeline using jenkins/gitlabCI :
       
       A webhook on the repository will be implemented as such whenever there is a commit to the master branch this pipeline gets triggered.UI and API code is 
-      maintained in this repository . Any changes to the code triggers new application docker creation.
+      maintained in this repository . Any changes to the code triggers new application docker creation & deployment.
       
         stage 1: checkout the code
         stage 2: linter and codecoverage
         stage 3: build 
         stage 4: unit testing
-        stage 5: docker image creation
+        stage 5: lambda code zipfile for api , static web pags creation for UI
         stage 6: vulnerability scan
-        stage 7: Integration testing
-        stage 8: image push to nexus
-        stage 9: push to ecr
-        stage 10: upgrade ecs or ec2 docker-compose
-        stage 11: sanity/smoke tests 
+        stage 7: Integration testing        
+        stage 8: Upgrade static site on s3 and api on lambda        
+        stage 9: sanity/smoke tests 
 
 
 **Challenge#2:**
