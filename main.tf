@@ -7,6 +7,11 @@ terraform {
       version = "~> 3.48.0"
     }
   }
+  backend "s3" {
+    bucket = "tf-state"
+    region = var.aws_region
+    key    = "challenge1.tfstate"
+  }
 
 }
 
